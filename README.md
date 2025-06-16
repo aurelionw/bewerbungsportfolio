@@ -78,7 +78,7 @@ python app.py
 B.Sc. Angewandte Mathematik – Hochschule Darmstadt  
 Stipendiat des Evangelischen Studienwerks Villigst  
 E-Mail: aurelio.nwamusse@stud.h-da.de  
-LinkedIn: [Profil hier verlinken]
+LinkedIn: https://www.linkedin.com/in/aur%C3%A9lio-nwamusse-588121279/
 
 ---
 
