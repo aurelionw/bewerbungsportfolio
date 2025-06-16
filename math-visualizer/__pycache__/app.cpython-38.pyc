@@ -1,119 +1,0 @@
-U
-
-    ø“†g›#  ã                   @   sÚ   d dl mZmZmZmZ d dlZd dlZd dlZd dl	Z	d dl
-mZ d dlm
-Z
- eeƒZe d¡dd„ ƒZdd	„ Zejd
-dgdd
-d„ ƒZejddgddd„ ƒZdd„ Zejddgddd„ ƒZedkrÖejdd dS )é    )ÚFlaskÚrequestÚjsonifyÚrender_templateN)ÚKurvendiskussion)Ú	Rechenwegú/c                  C   s   d} t d| dS )Nz
-x^3 - 3*x + 2zhtmlprobe.html©Zexample_function)r   r	   © r
-   ú?C:\Users\Aurelio\Documents\Prog\Kurvendiskussionsrechner\app.pyÚ	htmlprobe   s    r   c                 C   sN   t | tjƒrt | ¡S t | tƒr2dd„ |  ¡ D ƒS t | tƒrJdd„ | D ƒS | S )Nc                 S   s   i | ]\}}|t |ƒ“qS r
-   ©Úconvert_to_json_compatible)Ú.0ÚkeyÚvaluer
-   r
-   r   Ú
-<dictcomp>   s      z.convert_to_json_compatible.<locals>.<dictcomp>c                 S   s   g | ]}t |ƒ‘qS r
-   r
-   )r   Úitemr
-   r
-   r   Ú
-<listcomp>   s     z.convert_to_json_compatible.<locals>.<listcomp>)Ú
-isinstanceÚspZBasicÚlatexÚdictÚitemsÚlist)Údatar
-   r
-   r   r      s    
-
-
-r   z
-/api/simplifyZPOST)Úmethodsc               	   C   sj   t  ¡ } |  d¡}z,t |¡}t |¡}t |¡}td|iƒW S  tjt	fk
-rd   td|iƒ Y S X d S )NÚfunktionr   )
-r   Úget_jsonÚgetr   ÚsympifyZsimplifyr   r   ZSympifyErrorÚ
-ValueError)r   Úfunktion_strZexprZsimplified_exprZlatex_outputr
-   r
-   r   Úsimplify_expression   s    
-
-
-
-r#   z/api/kurvendiskussionc               
-   C   s8  t  ¡ } |  d¡}|  dd¡}|  d¡}zº| dd¡}t dd|¡}| d	d
-¡}t d|¡}||krv|rr|d nd}t |¡}t 	|¡}t
-||ƒ}t |¡}||d
-œ}	tƒ }
-d|krðt
-| ¡  dg ¡ƒ|	d< t||ƒ}| ¡ }| dg ¡|	d< d|krt
-| ¡  dd¡ƒ|	d< d|kr`t
-| ¡  dg ¡ƒ|	d< |
- d¡ t||ƒ}| ¡ }| dg ¡|	d< d|kr®t
-| ¡  dg ¡ƒ|	d< |
- d¡ t||ƒ}| ¡ }| dg ¡|	d< d|krÈt
-| ¡ ƒ|	d< |
-rÜ| |
-¡|	d< t|	ƒW S  tk
-r2 }
- z.td|› d|
-› ƒ td t|
-ƒd!œƒ W Y ¢S d }
-~
-X Y nX d S )"Nr   ÚvariableÚxZselectedú^ú**z(\d+)([a-zA-Z])ú\1*\2õ   âˆ’ú-ú	[a-zA-Z]+r   )r   r$   ZNullstellenÚschritteZNullstellen_rechenwegzy-AchsenabschnittzNicht definiertZ
-ExtremstellenZ
-extremstellenZersteZExtremstellen_rechenwegZWendepunkteZwendepunkteZzweiteZWendepunkte_rechenwegzVerhalten im unendlichenzVerhalten im UnendlichenZAbleitungenú Fehler in der Verarbeitung von 'ú': Úerror©ZstatusÚmessage)r   r   r   ÚreplaceÚreÚsubÚfindallr   Úsymbolsr    r   r   Úsetr   Znullstellenr   Úwelche_rechnung_benutzenZberechne_y_achsenabschnittZberechne_extremstellenÚaddZberechne_wendepunkteZverhalten_im_unendlichenZableitungen_anzeigenr   Ú	ExceptionÚprintÚstr)r   r"   Úselected_variableZselected_optionsÚdetected_variablesr$   r   ZkdZlatex_functionZresponseZableitungenÚrechenweg_instanceÚ	rechenwegÚer
-   r
-   r   Úkurvendiskussion)   sd    
-
-
-
-
-
-
-
-
-ÿ
-ÿ
-
-
-ÿ
-
-
-
-rB   c              	   C   sÚ   g }|  dt | ¡› dt |¡› d¡ |  d¡ |D ]Ž}d|krtd|krt|  t |d ¡› dt |d ¡› d¡ d	|kr˜|  d
-t |d	 ¡› d¡ d|kr6|  d
-¡ |  t |d ¡› d¡ q6|  d¡ d |¡S )z=
-    Formatiert den Polynomdivision-Rechenweg als LaTeX.
-    z\text{z
-} : \left(z\right)z\begin{array}{r|l}ÚdividendZquotientz & z \\Z
-subtractedz-(z) \\Z	remainderz\hlinez\end{array}Ú
-)Úappendr   r   Újoin)rC   ZdivisorZstepsr   Ústepr
-   r
-   r   Úformat_polynomdivision_as_latexz   s    $
-*
-
-rH   z/api/rechenwegc               
-   C   sê  t  ¡ } |  d¡}|  dd¡}zv| dd¡}t dd|¡}| dd	¡ d
-d¡}ttt d|¡ƒƒ}||kr||rx|d
- nd}t	 
-|¡}t	 |¡}t||ƒ}g }t
-d|› ƒ t	 |¡ ¡ dkrÚ| ¡ }| | dg ¡¡ q¬t	 |¡ ¡ dkr
-| ¡ }	| |	 dg ¡¡ nFt	 |¡ ¡ dkrPt	 ||¡}
-| dt	 |¡› dt	 |
-¡› dœ¡ g }|D ]*}| | dd¡› d| dd¡› ¡ qXtdd |¡iƒW S  tk
-rä }
- z.t
-d|› d|
-› ƒ tdt|
-ƒdœƒ W Y ¢S d }
-~
-X Y nX d S )Nr   r$   r%   r&   r'   z(\d)([a-zA-Z])r(   r)   r*   ú Ú r+   r   zBereinigte Funktion: é   r,   é   é   u!   Lineares AuflÃ¶sen der Gleichung:z = 0 \Rightarrow )Útextr   rN   z: r   r   z\\ 
-r-   r.   r/   r0   )r   r   r   r2   r3   r4   r   r7   r5   r   r6   r    r   r;   ZPolyZdegreer8   ÚextendZ	pq_formelZsolverE   r   r   rF   r:   r<   )r   r"   r=   r>   r$   r   r?   Zrechenweg_schritteZpolynomdivision_resultZ	pq_resultZloesungZlatex_stepsrG   rA   r
-   r
-   r   r@      sJ    
-
-
-
-þ( ÿr@   Ú__main__T)Údebug)Zflaskr   r   r   r   Zsympyr   r3   Ú
-subprocessÚosZ1Kurvendiskussionsrechner.modules.Kurvendiskussionr   Z*Kurvendiskussionsrechner.modules.Rechenwegr   Ú__name__ZappZrouter   r   r#   rB   rH   r@   Úrunr
-   r
-   r
-   r   Ú<module>   s&   
-
-
-
-P
-Z
