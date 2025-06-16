@@ -47,8 +47,6 @@ Dieses Tool dient der automatisierten Kurvendiskussion für beliebige Polynomfun
 - `modules/` – Rechenlogik (Kurvendiskussion, Rechenweg, Polynomdivision)
 - `templates/` – HTML-Frontend
 - `static/` – CSS und JavaScript
-- `latex_packages/` – LaTeX-Komponenten zur Visualisierung (u. a. `polynom.sty`)
-- `loading_gifs/` – Ladeanimationen (optional)
 
 ---
 
